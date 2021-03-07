@@ -8,8 +8,8 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        unique: true,
+        required: [true, 'É necessário informar um e-mail.'],
+        unique: [true, 'O email digitado já está em uso.'],
         lowercase: true,
     },
     password: {
