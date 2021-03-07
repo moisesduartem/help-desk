@@ -9,8 +9,15 @@ class SeedController {
 
             await User.create({
                 name: 'Moisés Mariano',
-                email: "moises@gmail.com",
+                email: 'moises@gmail.com',
                 role: roles.TECHNICIAN,
+                password: '123456'
+            });
+
+            await User.create({
+                name: 'Emanuel Duarte',
+                email: 'noel@gmail.com',
+                role: roles.COSTUMER,
                 password: '123456'
             });
 
