@@ -4,6 +4,7 @@ import UserController from './controllers/UserController';
 import AuthController from './controllers/AuthController';
 import SeedController from './controllers/SeedController';
 import CategoriesController from './controllers/CategoriesController';
+import ServiceCallsController from './controllers/ServiceCallsController';
 
 const routes = new Router();
 
@@ -14,6 +15,9 @@ routes.get('/users', checkCredentials, unauthorizeCostumers, UserController.inde
 routes.post('/users/register', checkCredentials, unauthorizeCostumers, UserController.store);
 
 routes.get('/categories', checkCredentials, CategoriesController.index);
+
+routes.get('/serviceCalls', checkCredentials, ServiceCallsController.index);
+routes.post('/serviceCalls', checkCredentials, ServiceCallsController.store);
 
 routes.post('/seed', SeedController.run);
 
