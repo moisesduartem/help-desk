@@ -4,17 +4,19 @@ import jwt from 'jsonwebtoken';
 import jwtConfig from './../config/jwt';
 
 class AuthController {
-    async store(req, res) {
+    async login(req, res) {
+
         const { email, password } = req.body;
-        const user = await User.findOne({ email });
         
+        let user = await User.findOne({ email }).select("+password");
+
         if (!user) {
             return res.status(400).json({ message: 'Email e/ou senha inválidos.' });
         }
 
         const checkPassword = await bcrypt.compare(password, user.password);
 
-        if(!checkPassword) {
+        if (!checkPassword) {
             return res.status(400).json({ message: 'Email e/ou senha inválidos.' });
         }
 
@@ -25,8 +27,9 @@ class AuthController {
             expiresIn
         });
 
-        res.json({ user: user.show(), token, exp: expiresIn })
+        user = await User.findById(user._id);
 
+        return res.json({ user, token, expiresIn });
     }
 }
 
