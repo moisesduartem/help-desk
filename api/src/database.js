@@ -6,7 +6,7 @@ class Database {
     }
 
     init() {
-        mongoose.connect('mongodb://localhost:27017/nodeapi', {
+        mongoose.connect('mongodb://localhost:17017/help_desk', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
