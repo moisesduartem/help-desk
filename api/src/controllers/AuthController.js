@@ -9,13 +9,13 @@ class AuthController {
         const user = await User.findOne({ email });
         
         if (!user) {
-            return res.status(400).json({ message: 'Credentials do not match.' });
+            return res.status(400).json({ message: 'Email e/ou senha inválidos.' });
         }
 
         const checkPassword = await bcrypt.compare(password, user.password);
 
         if(!checkPassword) {
-            return res.status(400).json({ message: 'Credentials do not match.' });
+            return res.status(400).json({ message: 'Email e/ou senha inválidos.' });
         }
 
         const { secret, expiresIn } = jwtConfig;
