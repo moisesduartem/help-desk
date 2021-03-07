@@ -24,6 +24,11 @@ const ServiceCallSchema = new Schema({
         ref: 'User',
         required: false,
     },
+    status: {
+        type: Schema.Types.ObjectId,
+        ref: 'ServiceStatus',
+        required: [true, 'É necessário informar o status do chamado.'],
+    },
     deleted: {
         type: Boolean,
         default: false,

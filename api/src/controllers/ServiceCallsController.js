@@ -1,4 +1,5 @@
 import ServiceCall from '../models/serviceCall';
+import ServiceStatus from '../models/serviceStatus';
 import User from '../models/user';
 
 class ServiceCallsController {
@@ -14,11 +15,13 @@ class ServiceCallsController {
             if (user.isCostumer) {
                 serviceCalls = await ServiceCall.findOne({ author: user._id })
                     .populate({ path: 'category' })
+                    .populate({ path: 'status' })
                     .populate({ path: 'author', populate: { path: 'role' } })
                     .populate({ path: 'responsible', populate: { path: 'role' } });
             } else {
                 serviceCalls = await ServiceCall.find()
                     .populate({ path: 'category' })
+                    .populate({ path: 'status' })
                     .populate({ path: 'author', populate: { path: 'role' } })
                     .populate({ path: 'responsible', populate: { path: 'role' } });
             }
@@ -32,12 +35,13 @@ class ServiceCallsController {
     async update(req, res) {
 
         const { id } = req.params;
-        const { category, responsible } = req.body;
+        const { category, responsible, status } = req.body;
 
         try {
-            await (await ServiceCall.findOneAndUpdate(id, { category, responsible })).save();
+            await (await ServiceCall.findOneAndUpdate(id, { category, responsible, status })).save();
             const serviceCall = await ServiceCall.findById(id)
                 .populate({ path: 'category' })
+                .populate({ path: 'status' })
                 .populate({ path: 'author', populate: { path: 'role' } })
                 .populate({ path: 'responsible', populate: { path: 'role' } });
             return res.json({ serviceCall });
@@ -52,11 +56,13 @@ class ServiceCallsController {
 
         const { title, description, category } = req.body;
         const author = req.userId;
+        const status = await (await ServiceStatus.findOne({ description: 'Na Fila' }))._id;
 
         try {
-            let serviceCall = await ServiceCall.create({ title, description, category, author });
+            let serviceCall = await ServiceCall.create({ title, description, category, author, status });
             serviceCall = await ServiceCall.findById(serviceCall._id)
                 .populate({ path: 'category' })
+                .populate({ path: 'status' })
                 .populate({ path: 'author', populate: { path: 'role' } })
                 .populate({ path: 'responsible', populate: { path: 'role' } });
 

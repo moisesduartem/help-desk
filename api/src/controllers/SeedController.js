@@ -1,4 +1,5 @@
 import Role from '../models/role';
+import ServiceStatus from '../models/serviceStatus';
 import User from '../models/user';
 import Category from '../models/category';
 
@@ -10,6 +11,10 @@ class SeedController {
 
             for (let description of ['Cliente', 'Técnico', 'Líder Técnico', 'Analista de Sistemas', 'Analista de Redes']) {
                 await Role.create({ description });
+            }
+
+            for (let description of ['Na Fila', 'Em Andamento', 'Resolvida']) {
+                await ServiceStatus.create({ description });
             }
             
             const TECHNICIAN = await Role.findOne({ description: 'Técnico' });
@@ -39,8 +44,9 @@ class SeedController {
         const users = await User.find().populate('role');
         const categories = await Category.find();
         const roles = await Role.find();
+        const serviceStatuses = await ServiceStatus.find();
 
-        return res.json({ users, roles, categories });
+        return res.json({ users, roles, categories, serviceStatuses });
     }
 }
 
