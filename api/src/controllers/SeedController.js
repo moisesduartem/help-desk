@@ -1,3 +1,4 @@
+import { roles } from '../enum/roles';
 import User from '../models/user';
 
 class SeedController {
@@ -6,7 +7,12 @@ class SeedController {
 
         try {
 
-            await User.create({ name: 'Moisés Mariano', email: "moises@gmail.com", password: 'admin' });
+            await User.create({
+                name: 'Moisés Mariano',
+                email: "moises@gmail.com",
+                role: roles.TECHNICIAN,
+                password: 'admin'
+            });
 
         } catch (err) {
             return res.status(500).send(err);
