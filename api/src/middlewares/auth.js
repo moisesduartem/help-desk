@@ -16,8 +16,11 @@ export async function checkCredentials(req, res, next) {
 
     try {
         const decoded = await verify(token, secret);
+        const id = decoded.sub;
+        req.userId = id;
+
         return next();
-    } catch (e) {
-        return res.status(401).json({ message: 'JSON Web Token inválido.'});
+    } catch (err) {
+        return res.status(401).json({ message: 'JSON Web Token inválido.' });
     }
 };
