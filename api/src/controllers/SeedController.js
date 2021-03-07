@@ -11,7 +11,7 @@ class SeedController {
                 name: 'Moisés Mariano',
                 email: "moises@gmail.com",
                 role: roles.TECHNICIAN,
-                password: 'admin'
+                password: '123456'
             });
 
         } catch (err) {
