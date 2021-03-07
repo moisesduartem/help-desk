@@ -7,6 +7,11 @@ class UserController {
         return res.json({ users });
     }
 
+    async logged(req, res) {
+        const user = await User.findById(req.userId);
+        return res.json({ user });
+    }
+
     async store(req, res) {
 
         const { name, email, password } = req.body;
