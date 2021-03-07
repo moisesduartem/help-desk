@@ -1,12 +1,27 @@
 import ServiceCall from '../models/serviceCall';
+import User from '../models/user';
 
 class ServiceCallsController {
 
     async index(req, res) {
+
+
+        const user = await User.findById(req.userId);
+        let serviceCalls = [];
+
         try {
-            const serviceCalls = await ServiceCall.find()
-                .populate({ path: 'category' })
-                .populate({ path: 'responsible', populate: { path: 'role' } });
+
+            if (user.isCostumer) {
+                serviceCalls = await ServiceCall.findOne({ author: user._id })
+                    .populate({ path: 'category' })
+                    .populate({ path: 'author', populate: { path: 'role' } })
+                    .populate({ path: 'responsible', populate: { path: 'role' } });
+            } else {
+                serviceCalls = await ServiceCall.find()
+                    .populate({ path: 'category' })
+                    .populate({ path: 'author', populate: { path: 'role' } })
+                    .populate({ path: 'responsible', populate: { path: 'role' } });
+            }
 
             return res.json({ serviceCalls });
         } catch (err) {
@@ -15,13 +30,17 @@ class ServiceCallsController {
     }
 
     async store(req, res) {
-        const { title, description, category, responsible } = req.body;
+        
+        const { title, description, category } = req.body;
+        const author = req.userId;
+
         try {
-            let serviceCall = await ServiceCall.create({ title, description, category, responsible });
+            let serviceCall = await ServiceCall.create({ title, description, category, author });
             serviceCall = await ServiceCall.findById(serviceCall._id)
                 .populate({ path: 'category' })
+                .populate({ path: 'author', populate: { path: 'role' } })
                 .populate({ path: 'responsible', populate: { path: 'role' } });
-                
+
             return res.json({ serviceCall });
         } catch (err) {
             return res.status(500).send(err);

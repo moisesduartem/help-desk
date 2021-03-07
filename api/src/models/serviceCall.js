@@ -14,10 +14,15 @@ const ServiceCallSchema = new Schema({
         ref: 'Category',
         required: [true, 'É necessário informar a categoria do chamado.'],
     },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'É necessário informar o autor do chamado.'],
+    },
     responsible: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'É necessário informar o usuário responsável pelo chamado.'],
+        required: false,
     },
     deleted: {
         type: Boolean,
