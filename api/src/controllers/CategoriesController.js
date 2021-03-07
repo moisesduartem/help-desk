@@ -1,4 +1,3 @@
-import { roles } from '../enum/roles';
 import Category from '../models/category';
 
 class CategoriesController {
