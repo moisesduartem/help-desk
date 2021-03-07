@@ -1,4 +1,4 @@
-import { roles } from '../enum/roles';
+import { COSTUMER, roles, TECHNICIAN } from '../enum/roles';
 import User from '../models/user';
 
 class SeedController {
@@ -10,14 +10,14 @@ class SeedController {
             await User.create({
                 name: 'Moisés Mariano',
                 email: 'moises@gmail.com',
-                role: roles.TECHNICIAN,
+                role: TECHNICIAN,
                 password: '123456'
             });
 
             await User.create({
                 name: 'Emanuel Duarte',
                 email: 'noel@gmail.com',
-                role: roles.COSTUMER,
+                role: COSTUMER,
                 password: '123456'
             });
 
@@ -27,7 +27,7 @@ class SeedController {
 
         const users = await User.find();
 
-        return res.json({ users });
+        return res.json({ users, roles });
     }
 }
 

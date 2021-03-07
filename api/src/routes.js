@@ -8,6 +8,7 @@ const routes = new Router();
 
 routes.post('/login', AuthController.login);
 routes.get('/users/logged', checkCredentials, UserController.logged);
+routes.get('/users/roles', checkCredentials, UserController.roles);
 routes.get('/users', checkCredentials, unauthorizeCostumers, UserController.index);
 routes.post('/users/register', checkCredentials, unauthorizeCostumers, UserController.store);
 

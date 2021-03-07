@@ -22,7 +22,7 @@ const UserSchema = new Schema({
         type: String,
         required: false,
         default: 'Cliente',
-        enum: [roles.COSTUMER, roles.TECHNICIAN, roles.TECH_LEADER, roles.SYSTEMS_ANALYST, roles.NETWORK_ANALYST],
+        enum: roles,
     },
     deleted: {
         type: Boolean,
