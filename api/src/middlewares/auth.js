@@ -1,7 +1,9 @@
-import { secret, verify } from 'jsonwebtoken';
+`use strict`;
+
+import { verify } from 'jsonwebtoken';
 import jwtConfig from './../config/jwt';
 
-export default async (req, res, next) => {
+export async function checkCredentials(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {

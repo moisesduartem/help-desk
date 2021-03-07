@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import auth from './middlewares/auth';
+import { checkCredentials } from './middlewares/auth';
 import UserController from './controllers/UserController';
 import AuthController from './controllers/AuthController';
 import SeedController from './controllers/SeedController';
 
 const routes = new Router();
 
-routes.get('/users', auth, UserController.index);
+routes.get('/users', checkCredentials, UserController.index);
 routes.post('/login', AuthController.store);
 routes.post('/register', UserController.store);
 
