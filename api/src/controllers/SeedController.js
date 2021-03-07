@@ -1,18 +1,15 @@
 import User from '../schema';
-import { getErrorMessage } from '../functions';
 
 class SeedController {
 
     async run(req, res) {
 
         try {
-            await User.create({ name: 'Moisés Mariano', email: "moises@gmail.com", password: 'admin' });
-        } catch (err) {
 
-            let errors = err?.errors ?? [];
-            return res.status(500).send({
-                message: getErrorMessage(errors)
-            });
+            await User.create({ name: 'Moisés Mariano', email: "moises@gmail.com", password: 'admin' });
+
+        } catch (err) {
+            return res.status(500).send(err);
         }
 
         const users = await User.find();
