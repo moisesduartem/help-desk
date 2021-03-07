@@ -1,12 +1,12 @@
 `use strict`;
 
 import { verify } from 'jsonwebtoken';
-import { roles } from '../enum/roles';
 import User from '../models/user';
 import jwtConfig from './../config/jwt';
 
 export async function checkCredentials(req, res, next) {
     const authHeader = req.headers.authorization;
+
 
     if (!authHeader) {
         return res.status(401).json({ message: 'É necessário fornecer um token de autenticação.' });
@@ -30,7 +30,11 @@ export async function checkCredentials(req, res, next) {
 export async function unauthorizeCostumers(req, res, next) {
     const user = await User.findById(req.userId);
 
-    if (user.role === roles.COSTUMER) {
+    if(!user) {
+        return res.status(500).json({ message: 'Usuário inválido.' });
+    }
+
+    if (user.isCostumer) {
         return res.status(401).json({ message: 'Apenas funcionários podem acessar essa rota.' });
     }
 

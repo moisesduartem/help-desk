@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { roles } from '../enum/roles';
 
 const UserSchema = new Schema({
     name: {
@@ -18,11 +17,14 @@ const UserSchema = new Schema({
         required: [true, 'É necessário informar uma senha.'],
         select: false,
     },
+    isCostumer: {
+        type: Boolean,
+        default: true
+    },
     role: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Role',
         required: false,
-        default: 'Cliente',
-        enum: roles,
     },
     deleted: {
         type: Boolean,

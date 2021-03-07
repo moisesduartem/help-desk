@@ -1,4 +1,4 @@
-import { COSTUMER, roles, TECHNICIAN } from '../enum/roles';
+import Role from '../models/role';
 import User from '../models/user';
 import Category from '../models/category';
 
@@ -8,9 +8,16 @@ class SeedController {
 
         try {
 
+            for (let description of ['Cliente', 'Técnico', 'Líder Técnico', 'Analista de Sistemas', 'Analista de Redes']) {
+                await Role.create({ description });
+            }
+            
+            const TECHNICIAN = await Role.findOne({ description: 'Técnico' });
+            
             await User.create({
                 name: 'Moisés Mariano',
                 email: 'moises@gmail.com',
+                isCostumer: false,
                 role: TECHNICIAN,
                 password: '123456'
             });
@@ -18,10 +25,9 @@ class SeedController {
             await User.create({
                 name: 'Emanuel Duarte',
                 email: 'noel@gmail.com',
-                role: COSTUMER,
                 password: '123456'
             });
-
+            
             for (let description of ['PC', 'Notebook', 'Impressora', 'Rede', 'Software']) {
                 await Category.create({ description });
             }
@@ -30,8 +36,9 @@ class SeedController {
             return res.status(500).send(err);
         }
 
-        const users = await User.find();
+        const users = await User.find().populate('role');
         const categories = await Category.find();
+        const roles = await Role.find();
 
         return res.json({ users, roles, categories });
     }
