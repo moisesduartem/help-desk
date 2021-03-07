@@ -1,4 +1,4 @@
-import User from '../schema';
+import User from '../models/user';
 
 class UserController {
 

@@ -1,4 +1,4 @@
-import User from '../schema';
+import User from '../models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import jwtConfig from './../config/jwt';
