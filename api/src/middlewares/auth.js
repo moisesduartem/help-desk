@@ -7,7 +7,7 @@ export async function checkCredentials(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-        return status(401).json({ message: 'É necessário fornecer um token de autenticação.' });
+        return res.status(401).json({ message: 'É necessário fornecer um token de autenticação.' });
     }
 
     const [, token] = authHeader.split(' ');
