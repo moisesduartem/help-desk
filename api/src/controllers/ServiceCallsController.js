@@ -29,8 +29,27 @@ class ServiceCallsController {
         }
     }
 
+    async update(req, res) {
+
+        const { id } = req.params;
+        const { category, responsible } = req.body;
+
+        try {
+            await (await ServiceCall.findOneAndUpdate(id, { category, responsible })).save();
+            const serviceCall = await ServiceCall.findById(id)
+                .populate({ path: 'category' })
+                .populate({ path: 'author', populate: { path: 'role' } })
+                .populate({ path: 'responsible', populate: { path: 'role' } });
+            return res.json({ serviceCall });
+
+        } catch (err) {
+            return res.status(500).send(err);
+        }
+
+    }
+
     async store(req, res) {
-        
+
         const { title, description, category } = req.body;
         const author = req.userId;
 

@@ -18,6 +18,7 @@ routes.get('/categories', checkCredentials, CategoriesController.index);
 
 routes.get('/serviceCalls', checkCredentials, ServiceCallsController.index);
 routes.post('/serviceCalls', checkCredentials, ServiceCallsController.store);
+routes.put('/serviceCalls/:id', checkCredentials, unauthorizeCostumers, ServiceCallsController.update);
 
 routes.post('/seed', SeedController.run);
 
