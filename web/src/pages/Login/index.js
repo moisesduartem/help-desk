@@ -1,21 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useShowPassword } from '../../hooks/useShowPassword';
 import { Button, Checkbox, Column, Input } from '../../styles';
 import { AppName, FormControl, PageContainer } from './styles';
-
-
-function useShowPassword(initialValue = false) {
-    
-    const [mustShowPassword, setMustShowPassword] = useState(initialValue);
-    const [passwordInputType, setPasswordInputType] = useState("password");
-
-    useEffect(() => {
-        setPasswordInputType(mustShowPassword ? "text" : "password");
-    }, [mustShowPassword]);
-
-    const handleShowPassword = e => setMustShowPassword(!mustShowPassword);
-
-    return { passwordInputType, handleShowPassword };
-}
 
 function Login(props) {
 
