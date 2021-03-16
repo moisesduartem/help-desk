@@ -8,9 +8,6 @@ function AppRoutes() {
             <Route exact path="/">
                 <h1>Welcome!</h1>
             </Route>
-            <Route path="*">
-                <h1>404</h1>
-            </Route>
         </Fragment>
     );
 }

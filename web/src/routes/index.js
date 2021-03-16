@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { useAuth } from '../context/auth';
+import AppRoutes from './app';
 import AuthRoutes from './auth';
 
 function Routes() {
 
-    const context = useAuth();
-    
-    useEffect(() => {
-        console.log(context);
-    }, []);
+    const { signed } = useAuth();
 
     return (
         <BrowserRouter>
             <Switch>
-                <AuthRoutes />
+                { signed ? <AppRoutes /> : <AuthRoutes /> }
             </Switch>
         </BrowserRouter>
     );
