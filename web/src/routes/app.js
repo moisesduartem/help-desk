@@ -5,6 +5,9 @@ function AppRoutes() {
 
     return (
         <Fragment>
+            <Route exact path="/login">
+                <Redirect to="/" />
+            </Route>
             <Route exact path="/">
                 <h1>Welcome!</h1>
             </Route>
