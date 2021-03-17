@@ -2,14 +2,26 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+
+    :root {
+        --dark: #161616;
+        --lighter-info: #1e6669;
+        --darker-info: #184647;
+        --info-hover: #fcffff;
+        --gray: #c5c5c5;
+        --light: #ededed;
+        --white: #ffffff;
+        --blue: #2177ff;
+    }
+
     * {
         font-family: 'Montserrat', sans-serif !important;
         margin: 0;
         padding: 0;    
     }
 
-    body {
-        height: 100vh;
+    &, body, html, #root {
+        height: 100%;
     }
 `;
 
@@ -19,7 +31,7 @@ export const Button = styled.button`
     font-weight: 500;
     margin: ${props => props?.margin};
     color: white;
-    background-color: #1e6669;
+    background-color: var(--lighter-info);
     border: none;
     outline: none;
     border-radius: 3px;
@@ -28,7 +40,7 @@ export const Button = styled.button`
 
     &:hover {
         transition: all .3s ease-in-out;
-        background-color: #184647;
+        background-color: var(--darker-info);
     }
 `;
 

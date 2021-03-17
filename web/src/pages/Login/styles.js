@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PageContainer = styled.div`
-    background-color: #ededed;
+    background-color: var(--light);
     width: 100%;
     height: 100vh;
     display: flex;
@@ -10,7 +10,7 @@ export const PageContainer = styled.div`
 
     a {
         margin: 1rem 0;
-        color: #2177ff;
+        color: var(--primary);
     }
 
     form {
@@ -22,7 +22,7 @@ export const PageContainer = styled.div`
         padding: 1.7rem;
         margin: 4px;
         height: 16rem;
-        background-color: #161616;
+        background-color: var(--dark);
         border-radius: 6px;
         width: 18rem;
 
@@ -31,7 +31,7 @@ export const PageContainer = styled.div`
         }
 
         label {
-            color: #ededed;
+            color: var(--light);
             font-weight: 300;
             text-align: left;
             margin: 10px auto;
