@@ -1,4 +1,5 @@
-export const primary = '#2aa38d';
-export const white = '#ffffff';
-
-export const colors = { primary, white };
+export const colors = {
+    primary: '#2aa38d',
+    primary2: '#227867', 
+    white: '#ffffff',
+};
