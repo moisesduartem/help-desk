@@ -21,7 +21,7 @@ function AppRoutes() {
     const AppTabRoutes = () => (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
+                tabBarIcon: ({ focused, color, size }) => {
 
                     let iconName;
 
@@ -37,7 +37,7 @@ function AppRoutes() {
                             break;
                     }
 
-                    return <Icon name={iconName} size={25} color={colors.secondary} />;
+                    return <Icon name={iconName} size={25} color={focused ? colors.light : colors.grey3} />;
                 },
             })}
             tabBarOptions={{
@@ -46,7 +46,7 @@ function AppRoutes() {
                     paddingBottom: 10,
                     backgroundColor: colors.dark,
                 },
-                activeTintColor: colors.white,
+                activeTintColor: colors.light,
                 inactiveTintColor: colors.grey1,
             }}
             initialRouteName="SearchServiceCall"
