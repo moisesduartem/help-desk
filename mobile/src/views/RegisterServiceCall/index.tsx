@@ -1,13 +1,13 @@
 import React from 'react'
 import { Text, View } from 'react-native';
 
-function Home() {
+function RegisterServiceCall() {
 
     return (
         <View>
-            <Text>Home</Text>
+            <Text>Registrar Chamado</Text>
         </View>
     );
 }
 
-export default Home;
+export default RegisterServiceCall;

@@ -9,6 +9,7 @@ export default function App() {
       <StatusBar
         animated={true}
         backgroundColor={colors.primary}
+        barStyle="light-content"
       />
       <Routes />
     </View >

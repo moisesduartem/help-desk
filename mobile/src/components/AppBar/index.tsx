@@ -6,10 +6,10 @@ import { Button, Header, Icon } from 'react-native-elements';
 import { colors } from '../../styles/colors';
 
 interface IAppBar {
-    navigation: any;
+    navigation?: any;
 }
 
-function AppBar({ navigation }: IAppBar) {
+function AppBar(props: IAppBar) {
 
     function _handleLogout(e: GestureResponderEvent) {
         Alert.alert('Já vai?', 'Até a próxima, Moisés!');
